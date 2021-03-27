@@ -11,6 +11,8 @@
 <script>
 import axios from 'axios'
 
+import socket from '@/socket.js'
+
 import Conversations from '@/components/Conversations.vue'
 import Conversation from '@/components/Conversation.vue'
 
@@ -41,6 +43,10 @@ export default {
   },
   computed: { },
   created() {
+    socket.on("message", (message) => {
+      console.log('vue got a message! ', message)
+    })
+
     axios.get('http://localhost:3000/custom/init/4')
       .then((response) => {
         this.conversations = response.data
