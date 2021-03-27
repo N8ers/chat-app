@@ -1,0 +1,62 @@
+<template>
+  <div>
+    <div v-for="message in messages" :key="message.id">
+      <div class="border h-30">
+        <span>{{ message.username }}: {{ message.content }}</span>
+        <button @click="deleteMessage(message)">X</button>
+      </div>
+    </div>
+
+    <form v-if="conversationId" @submit.prevent="sendMessage">
+      <input type="text" v-model="newMessage" />
+      <button type="submit">send</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  name: 'Conversation',
+  props: {
+    messages: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    conversationId: {
+      type: Number,
+      default: null
+    }
+  },
+  data: function () {
+    return {
+      newMessage: '',
+    }
+  },
+  computed: { },
+  methods: { 
+    sendMessage: function () {
+      // user id is hard coded for now until we do auth stuff
+      let payload = {
+        userId: 4,
+        conversationId: this.conversationId,
+        content: this.newMessage
+      }
+      axios.post('http://localhost:3000/messages', payload)
+        .then(() => {
+          this.newMessage = ''
+        })
+        .catch((err) => console.log('ERROR: ', err))
+    },
+    deleteMessage: function (message) {
+      axios.delete(`http://localhost:3000/messages/${message.id}`)
+        .then((res) => console.log('res ', res))
+        .catch((err) => console.log('ERROR: ', err))
+    }
+  }
+}
+</script>
+
