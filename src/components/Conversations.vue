@@ -1,8 +1,9 @@
 <template>
   <div>
+    <div class="border">Conversations:</div>
     <div v-for="conversation in conversations" :key="conversation.id">
       <div 
-        class="border h-40 pointer" 
+        class="border-topless h-40 pointer" 
         @click="selectConversation(conversation)"
       >{{ conversation.name }}</div>
     </div>
@@ -29,4 +30,3 @@ export default {
   }
 }
 </script>
-

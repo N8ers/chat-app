@@ -1,9 +1,12 @@
 <template>
-  <div>
-    <h1>Chat</h1>
-    <div class="container">
-      <Conversations :conversations="conversations" @conversationSelected="conversationSelected" />
-      <Conversation :messages="selectedConversationMessages" :conversationId="selectedConversationId" />
+  <div class="chat-container h-100vh">
+    <SideNav />
+    <div>
+      <h1>Chat</h1>
+      <div class="container">
+        <Conversations :conversations="conversations" @conversationSelected="conversationSelected" />
+        <Conversation :messages="selectedConversationMessages" :conversationId="selectedConversationId" />
+      </div>
     </div>
   </div>
 </template>
@@ -13,14 +16,16 @@ import axios from 'axios'
 
 import socket from '@/socket.js'
 
-import Conversations from '@/components/Conversations.vue'
+import SideNav from '@/components/SideNav.vue'
 import Conversation from '@/components/Conversation.vue'
+import Conversations from '@/components/Conversations.vue'
 
 export default {
   name: 'Chat',
   components: {
-    Conversations,
-    Conversation
+    SideNav,
+    Conversation,
+    Conversations
   },
   data: function () {
     return {

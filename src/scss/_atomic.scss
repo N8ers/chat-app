@@ -2,8 +2,18 @@
   border: 1px solid black;
 }
 
+.border-topless {
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  border-color: black;
+}
+
 .pointer {
   cursor: pointer
+}
+
+.h-100vh {
+  height: calc(100vh - 16px);
 }
 
 .h-40 {
@@ -12,6 +22,11 @@
 
 .h-30 {
   height: 30px;
+}
+
+.chat-container {
+  display: grid;
+  grid-template-columns: 75px auto;
 }
 
 .container {
