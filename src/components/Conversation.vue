@@ -17,6 +17,8 @@
 <script>
 import axios from 'axios'
 
+import socket from '@/socket.js'
+
 export default {
   name: 'Conversation',
   props: {
@@ -48,12 +50,17 @@ export default {
       axios.post('http://localhost:3000/messages', payload)
         .then(() => {
           this.newMessage = ''
+          // emit socket for latest data
+          socket.emit('selectConversation', { conversationId: this.conversationId })
         })
         .catch((err) => console.log('ERROR: ', err))
     },
     deleteMessage: function (message) {
       axios.delete(`http://localhost:3000/messages/${message.id}`)
-        .then((res) => console.log('res ', res))
+        .then(() => {
+          // emit socket for latest data
+          socket.emit('selectConversation', { conversationId: this.conversationId })
+        })
         .catch((err) => console.log('ERROR: ', err))
     }
   }
