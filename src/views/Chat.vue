@@ -31,19 +31,16 @@ export default {
   },
   methods: {
     conversationSelected: function (conversation) {
-      axios.get(`http://localhost:3000/custom/selectConversation/${conversation.conversationId}`)
-      .then((response) => {
-        this.selectedConversationMessages = response.data
+      socket.emit('selectConversation', { conversationId: conversation.conversationId })
+      socket.on('messages', (messages) => {
+        this.selectedConversationMessages = messages
         this.selectedConversationId = conversation.conversationId
-      })
-      .catch((err) => {
-        console.log('err ', err)
       })
     }
   },
   computed: { },
-  created() {
-    socket.on("message", (message) => {
+  created() { 
+    socket.on('message', (message) => {
       console.log('vue got a message! ', message)
     })
 
