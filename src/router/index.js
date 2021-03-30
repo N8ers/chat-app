@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Auth from '../views/Auth.vue'
 import Chat from '../views/Chat.vue'
 import Settings from '../views/Settings.vue'
+import Friends from '../views/Friends.vue'
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/chat',
     name: 'Chat',
     component: Chat
+  },
+  {
+    path: '/friends',
+    name: 'Friends',
+    component: Friends
   },
   {
     path: '/settings',

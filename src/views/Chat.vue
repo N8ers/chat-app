@@ -3,8 +3,12 @@
     <SideNav />
     <div>
       <h1>Chat</h1>
-      <div class="container">
-        <Conversations :conversations="conversations" @conversationSelected="conversationSelected" />
+      <div v-if="showConversations" class="container">
+        <Conversations 
+          :conversations="conversations"
+          :friends="friends" 
+          @conversationSelected="conversationSelected" 
+        />
         <Conversation :messages="selectedConversationMessages" :conversationId="selectedConversationId" />
       </div>
     </div>
@@ -32,6 +36,8 @@ export default {
       conversations: [],
       selectedConversationId: null,
       selectedConversationMessages: [],
+      friends: [],
+      showConversations: true
     }
   },
   methods: {
@@ -41,17 +47,34 @@ export default {
         this.selectedConversationMessages = messages
         this.selectedConversationId = conversation.conversationId
       })
+    },
+    toggleShowConversations: function () {
+      this.showConversations = !this.showConversations
     }
   },
-  computed: { },
+  computed: { 
+    user: function () {
+      return {
+        id: 4
+      }
+    }
+  },
   created() { 
     socket.on('message', (message) => {
       console.log('vue got a message! ', message)
     })
 
-    axios.get('http://localhost:3000/custom/init/4')
+    axios.get(`http://localhost:3000/custom/init/${this.user.id}`)
       .then((response) => {
         this.conversations = response.data
+      })
+      .catch((err) => {
+        console.log('err ', err)
+      })
+
+    axios.get(`http://localhost:3000/friends/userId/${this.user.id}`)
+      .then((response) => {
+        this.friends = response.data
       })
       .catch((err) => {
         console.log('err ', err)
