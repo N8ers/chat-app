@@ -43,15 +43,15 @@ export default {
     sendMessage: function () {
       // user id is hard coded for now until we do auth stuff
       let payload = {
-        userId: 4,
-        conversationId: this.conversationId,
+        user_id: 4,
+        conversation_id: this.conversationId,
         content: this.newMessage
       }
       axios.post('http://localhost:3000/messages', payload)
         .then(() => {
           this.newMessage = ''
           // emit socket for latest data
-          socket.emit('selectConversation', { conversationId: this.conversationId })
+          socket.emit('selectConversation', { conversation_id: this.conversationId })
         })
         .catch((err) => console.log('ERROR: ', err))
     },
@@ -59,7 +59,7 @@ export default {
       axios.delete(`http://localhost:3000/messages/${message.id}`)
         .then(() => {
           // emit socket for latest data
-          socket.emit('selectConversation', { conversationId: this.conversationId })
+          socket.emit('selectConversation', { conversation_id: this.conversationId })
         })
         .catch((err) => console.log('ERROR: ', err))
     }

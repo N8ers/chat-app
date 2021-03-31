@@ -8,6 +8,7 @@
           :conversations="conversations"
           :friends="friends" 
           @conversationSelected="conversationSelected" 
+          @startNewConversation="startNewConversation"
         />
         <Conversation :messages="selectedConversationMessages" :conversationId="selectedConversationId" />
       </div>
@@ -42,14 +43,68 @@ export default {
   },
   methods: {
     conversationSelected: function (conversation) {
-      socket.emit('selectConversation', { conversationId: conversation.conversationId })
+      console.log('conversation', conversation)
+      socket.emit('selectConversation', { conversation_id: conversation.conversation_id })
       socket.on('messages', (messages) => {
         this.selectedConversationMessages = messages
-        this.selectedConversationId = conversation.conversationId
+        this.selectedConversationId = conversation.conversation_id
+
+        // this.selectedConversation = {
+        //   conversationId: conversation.conversationId,
+        //   members: {
+        //     userId: null,
+        //     friendId: null
+        //   },
+        //   messages: messages
+        // }
       })
     },
     toggleShowConversations: function () {
       this.showConversations = !this.showConversations
+    },
+    getConversations: function () {
+      axios.get(`http://localhost:3000/custom/init/${this.user.id}`)
+      .then((response) => {
+        this.conversations = response.data
+      })
+      .catch((err) => {
+        console.log('err ', err)
+      })
+    },
+    getFriends: function () {
+      axios.get(`http://localhost:3000/friends/user_id/${this.user.id}`)
+      .then((response) => {
+        this.friends = response.data
+      })
+      .catch((err) => {
+        console.log('err ', err)
+      })
+    },
+    createConversation: function () {
+      return axios.post('http://localhost:3000/conversations')
+      .then((res) => res.data)
+      .catch((err) => err)
+    },
+    createConversationMember: function (userId, conversationId) {
+      return axios.post('http://localhost:3000/conversation_members', {
+        user_id: userId,
+        conversation_id: conversationId
+      })
+      .then((res) => res.data)
+      .catch((err) => err)
+    },
+    startNewConversation: async function (friendId) {
+      console.log('startNewConversation: ', friendId)
+
+      // post conversation
+      const conversation = await this.createConversation()
+      console.log('conversation', conversation)
+
+      // post conversation_members
+      await this.createConversationMember(friendId, conversation[0].id)
+      await this.createConversationMember(this.user.id, conversation[0].id)
+
+      this.getConversations();
     }
   },
   computed: { 
@@ -64,21 +119,8 @@ export default {
       console.log('vue got a message! ', message)
     })
 
-    axios.get(`http://localhost:3000/custom/init/${this.user.id}`)
-      .then((response) => {
-        this.conversations = response.data
-      })
-      .catch((err) => {
-        console.log('err ', err)
-      })
-
-    axios.get(`http://localhost:3000/friends/userId/${this.user.id}`)
-      .then((response) => {
-        this.friends = response.data
-      })
-      .catch((err) => {
-        console.log('err ', err)
-      })
+    this.getConversations()
+    this.getFriends()
   }
 }
 </script>
