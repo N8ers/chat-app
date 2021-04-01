@@ -9,8 +9,8 @@
       <select @change="startNewConversation($event.target.value)">
         <option 
           v-for="friend in friends"
-          :key="friend.userId"
-          :value="friend.userId"
+          :key="friend.user_id"
+          :value="friend.user_id"
           >{{ friend.username }}</option>
       </select>
     </div>
@@ -39,26 +39,23 @@ export default {
       showNewConversation: false
     }
   },
-  computed: {
-    conversationComputedTest: function () {
-      return 'conversationComputedTest'
-    }
-  },
+  computed: { },
   methods: {
     selectConversation: function (conversation) {
       this.$emit('conversationSelected', conversation)
     },
     startNewConversation: function (friendId) {
+      console.log('startnew',friendId)
       this.$emit('startNewConversation', friendId)
     },
     toggleNewConversation: function () {
       this.showNewConversation = !this.showNewConversation
     },
     conversationName: function (conversation) {
-      if (conversation.name && conversation.name.length) {
-        return conversation.name
+      if (conversation.conversationName && conversation.conversationName.length) {
+        return conversation.conversationName
       }
-      return conversation
+      return conversation.friendUsername
     }
   }
 }
