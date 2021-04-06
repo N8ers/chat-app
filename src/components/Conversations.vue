@@ -42,7 +42,8 @@ export default {
   computed: { },
   methods: {
     selectConversation: function (conversation) {
-      this.$emit('conversationSelected', conversation)
+      console.log('conversation, ', conversation.conversationId)
+      this.$emit('conversationSelected', { conversation_id: conversation.conversationId })
     },
     startNewConversation: function (friendId) {
       console.log('startnew',friendId)
