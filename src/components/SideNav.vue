@@ -1,10 +1,27 @@
 <template>
   <div class="border">
-    <div>Chat</div>
-    <router-link to="/friends">Friends</router-link> <br/>
-    <router-link to="/settings">Settings</router-link> <br/>
-    <router-link to="/chat">chat</router-link> <br/>
-    <router-link to="/">LogOut</router-link>
+
+    <router-link class="border" to="/friends">
+      <font-awesome-icon icon="user-friends" /> Friends
+    </router-link> 
+    
+    <br/><br/>
+
+    <router-link class="border" to="/settings">
+      <font-awesome-icon icon="cog" /> Settings
+    </router-link>
+
+    <br/><br/>
+    
+    <router-link class="border" to="/chat">
+      <font-awesome-icon icon="comments" /> Chat
+    </router-link>
+
+    <br/><br/>
+    
+    <router-link class="border" to="/">
+      <font-awesome-icon icon="sign-out-alt" /> LogOut
+    </router-link>
   </div>
 </template>
 
