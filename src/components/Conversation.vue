@@ -1,8 +1,15 @@
 <template>
-  <div>
+  <div class="conversation-container">
     <div v-for="message in messages" :key="message.id">
-      <div class="border h-30">
-        <span>{{ message.username }}: {{ message.content }}</span>
+      <div 
+        class="border h-30 message-container m-10"
+        :class="{
+          aqua: message.user_id !== 4, 
+          grass: message.user_id === 4
+        }"
+        >
+        <span>{{ message.username }}: </span>
+        <span>{{ message.content }}</span>
         <button @click="deleteMessage(message)">X</button>
       </div>
     </div>

@@ -1,3 +1,4 @@
+// BORDERS
 .border {
   border: 1px solid black;
 }
@@ -8,10 +9,12 @@
   border-color: black;
 }
 
+// POINTERS
 .pointer {
   cursor: pointer
 }
 
+// PADDING, MARGIN, HEIGHT
 .h-100vh {
   height: calc(100vh - 16px);
 }
@@ -24,12 +27,22 @@
   height: 30px;
 }
 
-.chat-container {
-  display: grid;
-  grid-template-columns: 75px auto;
+.m-10 {
+  margin: 10px;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 200px auto;
+// ALIGNMENT
+.right {}
+
+.left {}
+
+// COLOR PAIRS
+.aqua {
+  background-color: $aqua;
+  color: white;
+}
+
+.grass {
+  background-color: $grass;
+  color: white;
 }
