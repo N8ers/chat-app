@@ -58,7 +58,7 @@ export default {
       this.showConversations = !this.showConversations
     },
     getConversations: function () {
-      axios.get(`http://localhost:3000/custom/init/${this.user.id}`)
+      axios.get(`http://localhost:3000/custom/init/${this.user.userId}`)
       .then((response) => {
         this.conversations = response.data
       })
@@ -67,7 +67,7 @@ export default {
       })
     },
     getFriends: function () {
-      axios.get(`http://localhost:3000/friends/user_id/${this.user.id}`)
+      axios.get(`http://localhost:3000/friends/user_id/${this.user.userId}`)
       .then((response) => {
         this.friends = response.data
       })
