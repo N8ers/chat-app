@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Conversations',
   props: {
@@ -39,7 +41,9 @@ export default {
       showNewConversation: false
     }
   },
-  computed: { },
+  computed: {
+    ...mapGetters('user', ['user'])
+  },
   methods: {
     selectConversation: function (conversation) {
       console.log('conversation, ', conversation.conversationId)

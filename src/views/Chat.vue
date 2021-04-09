@@ -3,6 +3,8 @@
     <SideNav />
     <div>
       <h1>Chat</h1>
+      <div>GETTER TEST: {{ user }}</div>
+      <div>STATE TEST: {{ userIdFromState }}</div>
       <div v-if="showConversations" class="container">
         <Conversations 
           :conversations="conversations"
@@ -17,6 +19,8 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
+
 import axios from 'axios'
 
 import socket from '@/socket.js'
@@ -108,11 +112,10 @@ export default {
     }
   },
   computed: { 
-    user: function () {
-      return {
-        id: 4
-      }
-    }
+    ...mapGetters('user', ['user']),
+    ...mapState('user', {
+      userIdFromState: state => state.user.userId
+    })
   },
   created() { 
     socket.on('message', (message) => {

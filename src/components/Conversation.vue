@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 import socket from '@/socket.js'
@@ -45,7 +46,9 @@ export default {
       newMessage: '',
     }
   },
-  computed: { },
+  computed: { 
+    ...mapGetters('user', ['user'])
+  },
   methods: { 
     sendMessage: function () {
       // user id is hard coded for now until we do auth stuff
