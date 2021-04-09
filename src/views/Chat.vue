@@ -52,15 +52,6 @@ export default {
       socket.on('messages', (messages) => {
         this.selectedConversationMessages = messages
         this.selectedConversationId = conversation.conversation_id
-
-        // this.selectedConversation = {
-        //   conversationId: conversation.conversationId,
-        //   members: {
-        //     userId: null,
-        //     friendId: null
-        //   },
-        //   messages: messages
-        // }
       })
     },
     toggleShowConversations: function () {
@@ -106,7 +97,7 @@ export default {
 
       // post conversation_members
       await this.createConversationMember(friendId, conversation[0].id)
-      await this.createConversationMember(this.user.id, conversation[0].id)
+      await this.createConversationMember(this.user.userId, conversation[0].id)
 
       this.getConversations();
     }

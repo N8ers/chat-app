@@ -4,8 +4,8 @@
       <div 
         class="border h-30 message-container m-10"
         :class="{
-          aqua: message.user_id !== 4, 
-          grass: message.user_id === 4
+          aqua: message.user_id !== this.user.userId, 
+          grass: message.user_id === this.user.userId
         }"
         >
         <span>{{ message.username }}: </span>
@@ -53,7 +53,7 @@ export default {
     sendMessage: function () {
       // user id is hard coded for now until we do auth stuff
       let payload = {
-        user_id: 4,
+        user_id: this.user.userId,
         conversation_id: this.conversationId,
         content: this.newMessage
       }
