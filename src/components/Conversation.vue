@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import axios from 'axios'
 
 import socket from '@/socket.js'
@@ -47,7 +47,11 @@ export default {
     }
   },
   computed: { 
-    ...mapGetters('user', ['user'])
+    ...mapState('user', {
+      user: state => state.user,
+      friends: state => state.friends,
+      conversations: state => state.conversations
+    })
   },
   methods: { 
     sendMessage: function () {
