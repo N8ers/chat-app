@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     conversationSelected: function (conversation) {
-      console.log('conversation', conversation)
       socket.emit('selectConversation', { conversation_id: conversation.conversation_id })
       socket.on('messages', (messages) => {
         this.selectedConversationMessages = messages
@@ -53,15 +52,9 @@ export default {
       this.showConversations = !this.showConversations
     },
     startNewConversation: async function (friendId) {
-      console.log('startNewConversation: ', friendId)
-
-      // post conversation
       const conversation = await helpers.createConversation()
-
-      // post conversation_members
       await helpers.createConversationMember(friendId, conversation[0].id)
       await helpers.createConversationMember(this.user.userId, conversation[0].id)
-
       this.$store.dispatch('user/getConversations');
     }
   },
@@ -73,12 +66,8 @@ export default {
     })
   },
   created() { 
-    socket.on('message', (message) => {
-      console.log('vue got a message! ', message)
-    })
     this.$store.dispatch('user/getFriends');
     this.$store.dispatch('user/getConversations');
-  },
-  mounted() { }
+  }
 }
 </script>
