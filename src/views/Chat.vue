@@ -19,9 +19,8 @@
 <script>
 import { mapState } from 'vuex'
 
-import axios from 'axios'
-
 import socket from '@/socket.js'
+import helpers from '@/helpers/axiosRequests.js'
 
 import SideNav from '@/components/SideNav.vue'
 import Conversation from '@/components/Conversation.vue'
@@ -53,29 +52,15 @@ export default {
     toggleShowConversations: function () {
       this.showConversations = !this.showConversations
     },
-    createConversation: function () {
-      return axios.post('http://localhost:3000/conversations')
-      .then((res) => res.data)
-      .catch((err) => err)
-    },
-    createConversationMember: function (userId, conversationId) {
-      return axios.post('http://localhost:3000/conversation_members', {
-        user_id: userId,
-        conversation_id: conversationId
-      })
-      .then((res) => res.data)
-      .catch((err) => err)
-    },
     startNewConversation: async function (friendId) {
       console.log('startNewConversation: ', friendId)
 
       // post conversation
-      const conversation = await this.createConversation()
-      console.log('conversation', conversation)
+      const conversation = await helpers.createConversation()
 
       // post conversation_members
-      await this.createConversationMember(friendId, conversation[0].id)
-      await this.createConversationMember(this.user.userId, conversation[0].id)
+      await helpers.createConversationMember(friendId, conversation[0].id)
+      await helpers.createConversationMember(this.user.userId, conversation[0].id)
 
       this.$store.dispatch('user/getConversations');
     }
