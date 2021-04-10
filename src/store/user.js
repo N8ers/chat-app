@@ -6,39 +6,30 @@ export const state = {
     userName: 'N8'
   },
   friends: [],
-  openConversations: []
+  conversations: []
 }
 
 export const mutations = {
   setFriends: function (state, data) {
-    // const dummyData = [
-    //   {user_id: 1, username: "Goon"},
-    //   {user_id: 2, username: "Tsuki"},
-    //   {user_id: 3, username: "Joe"}
-    // ]
+    state.counter = state.counter + 1
+    console.log('state ', state)
     console.log('data ', data)
-    console.log('state.friends 1 ', state.friends)
     state.friends = data
-    console.log('state.friends 2 ', state.friends)
   }
 }
 
 export const actions = { 
-  async getFriends ({ state, commit }) {
+  getFriends: async function ({ state, commit }) {
     axios.get(`http://localhost:3000/friends/user_id/${state.user.userId}`)
-    .then((response) => commit('setFriends', response.data))
+    .then((response) => {
+      console.log('response: ', response.data)
+      commit('setFriends', response.data)
+    })
     .catch((err) => console.log('err ', err))
   }
 }
 
-export const getters = { 
-  user: function () {
-    return state.user
-  },
-  // friends: function () {
-  //   return state.friends
-  // }
-}
+export const getters = { }
 
 export default {
   namespaced: true,
