@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const baseURL = 'http://localhost:3000'
+
 export const state = {
   user: {
     userId: 4,
@@ -11,21 +13,23 @@ export const state = {
 
 export const mutations = {
   setFriends: function (state, data) {
-    state.counter = state.counter + 1
-    console.log('state ', state)
-    console.log('data ', data)
     state.friends = data
+  },
+  setConversations: function (state, data) {
+    state.conversations = data
   }
 }
 
 export const actions = { 
   getFriends: async function ({ state, commit }) {
-    axios.get(`http://localhost:3000/friends/user_id/${state.user.userId}`)
-    .then((response) => {
-      console.log('response: ', response.data)
-      commit('setFriends', response.data)
-    })
-    .catch((err) => console.log('err ', err))
+    axios.get(`${baseURL}/friends/user_id/${state.user.userId}`)
+    .then((response) => { commit('setFriends', response.data) })
+    .catch((err) => { console.log('err ', err) })
+  },
+  getConversations: async function ({ state, commit }) {
+    axios.get(`${baseURL}/custom/init/${state.user.userId}`)
+    .then((response) => { commit('setConversations', response.data) })
+    .catch((err) => { console.log('err ', err) })
   }
 }
 

@@ -36,7 +36,6 @@ export default {
   },
   data: function () {
     return {
-      conversations: [],
       selectedConversationId: null,
       selectedConversationMessages: [],
       showConversations: true
@@ -53,15 +52,6 @@ export default {
     },
     toggleShowConversations: function () {
       this.showConversations = !this.showConversations
-    },
-    getConversations: function () {
-      axios.get(`http://localhost:3000/custom/init/${this.user.userId}`)
-      .then((response) => {
-        this.conversations = response.data
-      })
-      .catch((err) => {
-        console.log('err ', err)
-      })
     },
     createConversation: function () {
       return axios.post('http://localhost:3000/conversations')
@@ -87,21 +77,22 @@ export default {
       await this.createConversationMember(friendId, conversation[0].id)
       await this.createConversationMember(this.user.userId, conversation[0].id)
 
-      this.getConversations();
+      this.$store.dispatch('user/getConversations');
     }
   },
   computed: { 
     ...mapState('user', {
       user: state => state.user,
-      friends: state => state.friends
+      friends: state => state.friends,
+      conversations: state => state.conversations
     })
   },
   created() { 
     socket.on('message', (message) => {
       console.log('vue got a message! ', message)
     })
-    this.getConversations()
     this.$store.dispatch('user/getFriends');
+    this.$store.dispatch('user/getConversations');
   },
   mounted() { }
 }
