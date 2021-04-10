@@ -46,7 +46,7 @@ export default {
       newMessage: '',
     }
   },
-  computed: { 
+  computed: {
     ...mapState('user', {
       user: state => state.user,
       friends: state => state.friends,
@@ -55,7 +55,6 @@ export default {
   },
   methods: { 
     sendMessage: function () {
-      // user id is hard coded for now until we do auth stuff
       let payload = {
         user_id: this.user.userId,
         conversation_id: this.conversationId,

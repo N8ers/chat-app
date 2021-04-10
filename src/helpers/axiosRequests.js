@@ -7,14 +7,14 @@ export const createConversationMember = async function (userId, conversationId) 
     user_id: userId,
     conversation_id: conversationId
   })
-  .then((res) => res.data)
-  .catch((err) => err)
+    .then((res) => res.data)
+    .catch((err) => err)
 }
 
 export const createConversation = async function () {
   return axios.post(`${baseURL}/conversations`)
-      .then((res) => res.data)
-      .catch((err) => err)
+    .then((res) => res.data)
+    .catch((err) => err)
 }
 
 export default {

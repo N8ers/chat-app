@@ -20,7 +20,7 @@ export const mutations = {
   }
 }
 
-export const actions = { 
+export const actions = {
   getFriends: async function ({ state, commit }) {
     axios.get(`${baseURL}/friends/user_id/${state.user.userId}`)
     .then((response) => { commit('setFriends', response.data) })
