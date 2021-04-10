@@ -66,15 +66,6 @@ export default {
         console.log('err ', err)
       })
     },
-    getFriends: function () {
-      axios.get(`http://localhost:3000/friends/user_id/${this.user.userId}`)
-      .then((response) => {
-        this.friends = response.data
-      })
-      .catch((err) => {
-        console.log('err ', err)
-      })
-    },
     createConversation: function () {
       return axios.post('http://localhost:3000/conversations')
       .then((res) => res.data)
@@ -114,7 +105,8 @@ export default {
     })
 
     this.getConversations()
-    this.getFriends()
+    this.$store.dispatch('user/getFriends');
+
   }
 }
 </script>
