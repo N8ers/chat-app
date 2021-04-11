@@ -1,0 +1,23 @@
+.message-container {
+  display: grid;
+  grid-template-columns: auto 30px;
+  border-radius: 10px;
+}
+
+.message-user {
+  background-color: $grass;
+  color: white;
+}
+
+.message-friend {
+  background-color: $tangerine;
+  color: white;
+}
+
+.message-user-content {
+  justify-self: end;
+}
+
+.message-friend-content {
+  justify-self: start;
+}

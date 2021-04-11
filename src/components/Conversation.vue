@@ -4,12 +4,16 @@
       <div 
         class="border h-30 message-container m-10"
         :class="{
-          aqua: message.user_id !== this.user.userId, 
-          grass: message.user_id === this.user.userId
+          'message-friend': message.user_id !== this.user.userId, 
+          'message-user': message.user_id === this.user.userId
         }"
         >
-        <span>{{ message.username }}: </span>
-        <span>{{ message.content }}</span>
+        <span 
+          :class="{
+            'message-friend-content': message.user_id !== this.user.userId, 
+            'message-user-content': message.user_id === this.user.userId
+          }"
+        >{{ message.content }}</span>
         <button @click="deleteMessage(message)">X</button>
       </div>
     </div>
