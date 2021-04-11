@@ -14,9 +14,10 @@
           >{{ friend.username }}</option>
       </select>
     </div>
-    <div v-for="conversation in conversations" :key="conversation.id">
+    <div v-for="conversation in conversations" :key="conversation.conversationId">
       <div
         class="border-topless h-40 pointer"
+        :class="{ 'selected-conversation': conversation.conversationId === this.selectedConversationId }"
         @click="selectConversation(conversation)"
       >{{ conversationName(conversation) }}</div>
     </div>
@@ -24,7 +25,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Conversations',
@@ -38,15 +39,18 @@ export default {
   },
     data: function () {
     return {
-      showNewConversation: false
+      showNewConversation: false,
+      selectedConversationId: null
     }
   },
   computed: {
-    ...mapGetters('user', ['user'])
+    ...mapState('user', {
+      user: state => state.user
+    })
   },
   methods: {
     selectConversation: function (conversation) {
-      console.log('conversation, ', conversation.conversationId)
+      this.selectedConversationId = conversation.conversationId
       this.$emit('conversationSelected', { conversation_id: conversation.conversationId })
     },
     startNewConversation: function (friendId) {
