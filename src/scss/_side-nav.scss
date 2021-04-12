@@ -1,0 +1,18 @@
+.side-nav {
+  background-color: $moss;
+}
+
+.active {
+  background-color: $grass;
+}
+
+.side-nav-item {
+  color: white;
+  text-decoration: none;
+  // border: 1px solid black;
+}
+
+.side-nav-icon {
+  margin: 0 auto;
+  display: block;
+}
