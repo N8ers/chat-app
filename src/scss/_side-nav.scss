@@ -2,17 +2,30 @@
   background-color: $moss;
 }
 
-.active {
-  background-color: $grass;
+.side-nav-router-link {
+  text-decoration: none;
+  color: #C4C4C4;
 }
 
 .side-nav-item {
-  color: white;
-  text-decoration: none;
-  // border: 1px solid black;
+  height: 50px;
+  border: 1px solid black;
 }
 
 .side-nav-icon {
-  margin: 0 auto;
-  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translate(0%, 65%);
+}
+
+.side-nav-text {
+  font-size: 12px;
+  transform: translate(0%, 70%);
+  text-decoration: none;
+}
+
+.active {
+  color: white;
+  background-color: $grass;
+  border-left: 3px solid $neon-green;
 }
