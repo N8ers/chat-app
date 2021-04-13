@@ -3,7 +3,15 @@
 @import "messages";
 @import "conversations";
 @import "side-nav";
+@import "auth";
 @import "atomic";
+
+.chat-header {
+  color: white;
+  text-shadow: -4px 4px black;
+  font-weight: 900;
+  font-size: 75px;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

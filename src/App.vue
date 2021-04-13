@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$route.name !== 'Chat' && $route.name !== 'Friends'" id="nav">
+  <div v-if="$route.name !== 'Chat' && $route.name !== 'Friends' && $route.name !== 'Auth'" id="nav">
     <router-link to="/">Auth</router-link> |
     <router-link to="/chat">Chat</router-link> |
     <router-link to="/settings">Settings</router-link>
