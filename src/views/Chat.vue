@@ -2,7 +2,7 @@
   <div class="chat-container h-100vh">
     <SideNav />
     <div>
-      <h1>Chat</h1>
+    <div class="chat-header">CHAT</div>
       <div v-if="showConversations" class="container">
         <Conversations 
           :conversations="conversations"

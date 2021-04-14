@@ -1,3 +1,18 @@
+.conversations-wrapper {
+  color: white;
+  text-align: left;
+  background-color: $moss;
+  height: 70vh;
+}
+
+.add-conversation-icon {
+  text-align: right;
+}
+
+.conversation {
+  padding-left: 5px;
+}
+
 .selected-conversation {
-  background-color: $sunshine;
+  background-color: $grass;
 }

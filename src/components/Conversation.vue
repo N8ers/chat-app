@@ -2,7 +2,7 @@
   <div class="conversation-container">
     <div v-for="message in messages" :key="message.id">
       <div 
-        class="border h-30 message-container m-10"
+        class="h-30 message-container m-10"
         :class="{
           'message-friend': message.user_id !== user.userId, 
           'message-user': message.user_id === user.userId
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <form v-if="conversationId" @submit.prevent="sendMessage">
+    <form v-if="conversationId" @submit.prevent="sendMessage" class="new-message">
       <input type="text" v-model="newMessage" />
       <button type="submit">send</button>
     </form>

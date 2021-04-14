@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div class="border">
-      Conversations: 
+  <div class="conversations-wrapper">
+    <div class="border add-conversation-icon">
       <button @click="toggleNewConversation">+</button>
     </div>
     <div v-if="showNewConversation" class="border">
@@ -16,7 +15,7 @@
     </div>
     <div v-for="conversation in conversations" :key="conversation.conversationId">
       <div
-        class="border-topless h-40 pointer"
+        class="border-topless h-40 pointer conversation"
         :class="{ 'selected-conversation': conversation.conversationId === this.selectedConversationId }"
         @click="selectConversation(conversation)"
       >{{ conversationName(conversation) }}</div>
