@@ -7,9 +7,16 @@
   color: #C4C4C4;
 }
 
+.active .side-nav-item {
+  color: white;
+  background-color: $grass;
+  border-left: 2px solid $neon-green;
+} 
+
 .side-nav-item {
   height: 50px;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
 }
 
 .side-nav-icon {
@@ -22,10 +29,4 @@
   font-size: 12px;
   transform: translate(0%, 70%);
   text-decoration: none;
-}
-
-.active {
-  color: white;
-  background-color: $grass;
-  border-left: 3px solid $neon-green;
 }
