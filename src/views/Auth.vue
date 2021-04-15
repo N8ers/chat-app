@@ -4,17 +4,17 @@
 
     <div class="auth-body">
       <div class="border auth-form">
-      <h1>Sign In</h1>
-      <form>
-        <input type="email" placeholder="email" />
-        <input type="password" placeholder="****" />
-        <button @click="signIn" type="submit">sign in</button>
-      </form>
-    </div>
+        <h1>Sign In</h1>
+        <form>
+          <input type="email" placeholder="email" />
+          <input type="password" placeholder="****" />
+          <button @click="signIn" type="submit">sign in</button>
+        </form>
+      </div>
 
-    <div class="border">
-      <h1>A safe, secure means of talking to your friends or strangers</h1>
-    </div>
+      <div class="border auth-message">
+        <h1>A safe, secure means of talking to your friends or strangers</h1>
+      </div>
     </div>
   </div>
 </template>
