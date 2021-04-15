@@ -4,10 +4,19 @@ import router from './router'
 import store from './store'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faUserFriends, faCog, faComments, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { 
+  faUserFriends, 
+  faSignOutAlt,
+  faPaperPlane,
+  faComments,
+  faCoffee,
+  faMinus,
+  faTimes,
+  faPlus, 
+  faCog } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCoffee, faUserFriends, faCog, faComments, faSignOutAlt)
+library.add(faUserFriends, faSignOutAlt, faPaperPlane, faComments, faCoffee, faMinus, faTimes, faPlus, faCog)
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)

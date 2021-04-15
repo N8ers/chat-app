@@ -1,7 +1,9 @@
 <template>
   <div class="conversations-wrapper">
     <div class="border add-conversation-icon">
-      <button @click="toggleNewConversation">+</button>
+      <div @click="toggleNewConversation">
+        <font-awesome-icon icon="plus" />
+      </div>
     </div>
     <div v-if="showNewConversation" class="border">
       <span>select friend: </span>

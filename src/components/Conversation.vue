@@ -14,13 +14,17 @@
             'message-user-content': message.user_id === user.userId
           }"
         >{{ message.content }}</span>
-        <button @click="deleteMessage(message)">X</button>
+        <div @click="deleteMessage(message)">        
+          <font-awesome-icon icon="times" />
+        </div>
       </div>
     </div>
 
     <form v-if="conversationId" @submit.prevent="sendMessage" class="new-message">
       <input type="text" v-model="newMessage" />
-      <button type="submit">send</button>
+      <button type="submit">
+        <font-awesome-icon icon="paper-plane" />
+      </button>
     </form>
   </div>
 </template>
