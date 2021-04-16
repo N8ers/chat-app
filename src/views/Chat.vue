@@ -10,7 +10,8 @@
           @conversationSelected="conversationSelected" 
           @startNewConversation="startNewConversation"
         />
-        <Conversation :messages="selectedConversationMessages" :conversationId="selectedConversationId" />
+        <Conversation v-if="showChat" :messages="selectedConversationMessages" :conversationId="selectedConversationId" />
+        <FriendsList :friends="friends" />
       </div>
     </div>
   </div>
@@ -25,19 +26,22 @@ import helpers from '@/helpers/axiosRequests.js'
 import SideNav from '@/components/SideNav.vue'
 import Conversation from '@/components/Conversation.vue'
 import Conversations from '@/components/Conversations.vue'
+import FriendsList from '@/components/FriendsList.vue'
 
 export default {
   name: 'Chat',
   components: {
     SideNav,
     Conversation,
-    Conversations
+    Conversations,
+    FriendsList
   },
   data: function () {
     return {
       selectedConversationId: null,
       selectedConversationMessages: [],
-      showConversations: true
+      showConversations: true,
+      showChat: true
     }
   },
   methods: {
