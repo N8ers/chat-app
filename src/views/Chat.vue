@@ -9,10 +9,12 @@
           :friends="friends" 
           @conversationSelected="conversationSelected" 
           @startNewConversation="startNewConversation"
+          @toggleFriendsList="toggleFriendsList"
         />
         <Conversation v-if="showChat" :messages="selectedConversationMessages" :conversationId="selectedConversationId" />
-        <FriendsList :friends="friends" />
       </div>
+
+      <FriendsList v-else :friends="friends" />
     </div>
   </div>
 </template>
@@ -54,6 +56,9 @@ export default {
     },
     toggleShowConversations: function () {
       this.showConversations = !this.showConversations
+    },
+    toggleFriendsList: function (bool) {
+      this.showConversations = bool
     },
     startNewConversation: async function (friendId) {
       const conversation = await helpers.createConversation()

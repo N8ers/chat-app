@@ -1,20 +1,11 @@
 <template>
   <div class="conversations-wrapper">
     <div class="border add-conversation-icon">
-      <div @click="toggleNewConversation">
+      <div @click="showFriendsList">
         <font-awesome-icon icon="plus" />
       </div>
     </div>
-    <div v-if="showNewConversation" class="border">
-      <span>select friend: </span>
-      <select @change="startNewConversation($event.target.value)">
-        <option 
-          v-for="friend in friends"
-          :key="friend.user_id"
-          :value="friend.user_id"
-          >{{ friend.username }}</option>
-      </select>
-    </div>
+
     <div v-for="conversation in conversations" :key="conversation.conversationId">
       <div
         class="border-topless h-40 pointer conversation"
@@ -40,7 +31,7 @@ export default {
   },
     data: function () {
     return {
-      showNewConversation: false,
+      // showNewConversation: false,
       selectedConversationId: null
     }
   },
@@ -54,12 +45,14 @@ export default {
       this.selectedConversationId = conversation.conversationId
       this.$emit('conversationSelected', { conversation_id: conversation.conversationId })
     },
-    startNewConversation: function (friendId) {
-      console.log('startnew',friendId)
-      this.$emit('startNewConversation', friendId)
+    startNewConversation: function () {
+      this.$emit('startNewConversation')
+    },
+    hideConversationsList: function () {
+      this.$emit('toggleFriendsList', false)
     },
     toggleNewConversation: function () {
-      this.showNewConversation = !this.showNewConversation
+      // this.showNewConversation = !this.showNewConversation
     },
     conversationName: function (conversation) {
       if (conversation.conversationName && conversation.conversationName.length) {
